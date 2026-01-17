@@ -17,7 +17,7 @@ sudo chown -R ralph:ralph /home/ralph/.ssh
 
 echo "ralph ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/ralph
 
-sudo -i -u ralph
+sudo -u ralph bash << 'EOF'
 
 # Install Nodejs
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
@@ -37,3 +37,4 @@ sudo usermod -aG docker ralph
 # Configure Git
 git config --global user.name "Ralph"
 git config --global user.email "ralph@boxydev.com"
+EOF
