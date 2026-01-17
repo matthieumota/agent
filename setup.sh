@@ -19,7 +19,10 @@ sudo chown -R ralph:ralph /home/ralph/.ssh
 
 echo "ralph ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/ralph
 
-sudo -u ralph bash << 'EOF'
+TOKEN=$(bash ./get-token.sh)
+export TOKEN
+
+sudo -E -u ralph -H bash << 'EOF'
 
 # Move to home directory
 cd $HOME
@@ -41,6 +44,9 @@ sudo usermod -aG docker ralph
 
 # Install Clawd Bot
 # curl -fsSL https://clawd.bot/install.sh | bash
+
+# Clone the repository
+git clone https://x-access-token:$TOKEN@github.com/matthieumota/agent.git
 
 # Configure Git
 git config --global user.name "ralph-vps[bot]"
