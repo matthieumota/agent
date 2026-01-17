@@ -10,7 +10,8 @@ ssh-keygen -t ed25519 -C "ralph@boxydev.com"
 cat /home/ubuntu/.ssh/id_ed25519.pub
 
 # Add Github app private key
-echo "TOKEN" > $HOME/app-private-key.pem
+echo "TOKEN" > $HOME/.ssh/app-private-key.pem
+chmod 600 $HOME/.ssh/app-private-key.pem
 
 # Run as ubuntu
 git clone git@github.com:matthieumota/agent.git

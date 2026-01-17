@@ -11,10 +11,10 @@ sudo chmod 700 /home/ralph/.ssh
 
 sudo cp /home/ubuntu/.ssh/authorized_keys /home/ralph/.ssh/
 sudo cp /home/ubuntu/.ssh/id_ed25519 /home/ralph/.ssh/
-sudo cp /home/ubuntu/app-private-key.pem /home/ralph/
+sudo cp /home/ubuntu/.ssh/app-private-key.pem /home/ralph/
 sudo chmod 600 /home/ralph/.ssh/authorized_keys
 sudo chmod 600 /home/ralph/.ssh/id_ed25519
-sudo chmod 600 /home/ralph/app-private-key.pem
+sudo chmod 600 /home/ralph/.ssh/app-private-key.pem
 sudo chown -R ralph:ralph /home/ralph/.ssh
 
 echo "ralph ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/ralph

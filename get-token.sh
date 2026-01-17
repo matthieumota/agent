@@ -2,7 +2,7 @@
 
 APP_ID=2672022
 INSTALLATION_ID=104604732
-PEM_FILE="./app-private-key.pem"
+PEM_FILE="$HOME/.ssh/app-private-key.pem"
 
 base64url_encode() {
     base64 -w0 | tr -d '=' | tr '/+' '_-'
