@@ -17,7 +17,10 @@ sudo chown -R ralph:ralph /home/ralph/.ssh
 
 echo "ralph ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/ralph
 
-sudo -u ralph bash << EOF
+sudo -u ralph bash << 'EOF'
+
+# Move to home directory
+cd $HOME
 
 # Install Nodejs
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
