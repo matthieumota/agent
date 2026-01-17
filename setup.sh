@@ -17,7 +17,7 @@ sudo chown -R ralph:ralph /home/ralph/.ssh
 
 echo "ralph ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/ralph
 
-sudo -u ralph bash << 'EOF'
+sudo -u ralph bash << EOF
 
 # Install Nodejs
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
@@ -28,7 +28,10 @@ nvm install 25
 sudo apt-get install -y gh libatomic1
 
 # Install Docker
-curl -sSL https://get.docker.com | sh
+if ! command -v docker &> /dev/null; then
+    curl -sSL https://get.docker.com | sh
+fi
+
 sudo usermod -aG docker ralph
 
 # Install Clawd Bot
