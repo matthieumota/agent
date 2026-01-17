@@ -1,12 +1,12 @@
 # Agent
 
-Repository where lives AI agents.
+Repository where lives AI agent.
 
 ## Get started
 
 ```bash
 # Generate a ssh key
-ssh-keygen -t ed25519 -C "matthieumota@gmail.com"
+ssh-keygen -t ed25519 -C "ralph@boxydev.com"
 cat /home/ubuntu/.ssh/id_ed25519.pub
 
 # Run as ubuntu
