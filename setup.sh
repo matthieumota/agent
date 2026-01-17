@@ -10,7 +10,7 @@ sudo mkdir -p /home/ralph/.ssh
 sudo chmod 700 /home/ralph/.ssh
 
 sudo cp /home/ubuntu/.ssh/authorized_keys /home/ralph/.ssh/
-sudo mv /home/ubuntu/.ssh/id_ed25519 /home/ralph/.ssh/
+sudo cp /home/ubuntu/.ssh/id_ed25519 /home/ralph/.ssh/
 sudo chmod 600 /home/ralph/.ssh/authorized_keys
 sudo chmod 600 /home/ralph/.ssh/id_ed25519
 sudo chown -R ralph:ralph /home/ralph/.ssh
