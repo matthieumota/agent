@@ -19,4 +19,6 @@ cd agent
 ./setup.sh
 
 # Log as ralph
+cd agent
+./update.sh
 ```

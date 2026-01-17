@@ -17,9 +17,9 @@ SIGNATURE=$(echo -n "${HEADER}.${PAYLOAD}" | openssl dgst -sha256 -sign "$PEM_FI
 JWT="${HEADER}.${PAYLOAD}.${SIGNATURE}"
 
 RESPONSE=$(curl -s -X POST \
-  -H "Authorization: Bearer $JWT" \
-  -H "Accept: application/vnd.github+json" \
-  "https://api.github.com/app/installations/${INSTALLATION_ID}/access_tokens")
+    -H "Authorization: Bearer $JWT" \
+    -H "Accept: application/vnd.github+json" \
+    "https://api.github.com/app/installations/${INSTALLATION_ID}/access_tokens")
 
 TOKEN=$(echo "$RESPONSE" | jq -r '.token')
 echo "$TOKEN"
