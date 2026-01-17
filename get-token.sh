@@ -1,8 +1,20 @@
 #!/bin/bash
+set -e
 
-APP_ID=2672022
-INSTALLATION_ID=104604732
-PEM_FILE="$HOME/.ssh/app-private-key.pem"
+APP_ID="${APP_ID:-2672022}"
+INSTALLATION_ID="${INSTALLATION_ID:-104604732}"
+PEM_FILE="${PEM_FILE:-$HOME/.ssh/app-private-key.pem}"
+
+# Validate PEM file exists and has correct permissions
+if [ ! -f "$PEM_FILE" ]; then
+    echo "Error: PEM file not found at $PEM_FILE" >&2
+    exit 1
+fi
+
+if [ $(stat -c %a "$PEM_FILE") != "600" ]; then
+    echo "Warning: PEM file has incorrect permissions. Fixing..." >&2
+    chmod 600 "$PEM_FILE"
+fi
 
 base64url_encode() {
     base64 -w0 | tr -d '=' | tr '/+' '_-'
