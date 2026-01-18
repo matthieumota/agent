@@ -22,3 +22,11 @@ cd agent
 cd agent
 ./update.sh
 ```
+
+## Auth Github
+
+We can authenticate from Github App :
+
+```bash
+gh auth login --with-token < <(bash /home/ralph/agent/get-token.sh)
+```
