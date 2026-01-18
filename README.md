@@ -30,3 +30,12 @@ We can authenticate from Github App :
 ```bash
 gh auth login --with-token < <(bash /home/ralph/agent/get-token.sh)
 ```
+
+## Browser
+
+Agent can use local browser :
+
+```bash
+google-chrome-stable --remote-debugging-port=9222 --user-data-dir=/tmp/chrome-debug
+ssh -R 9222:127.0.0.1:9222 -N ralph@vps
+```
