@@ -7,7 +7,8 @@ git pull https://x-access-token:${TOKEN}@github.com/matthieumota/agent.git
 # Install Nodejs
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 \. "$HOME/.nvm/nvm.sh"
-nvm install 25
+nvm install node
+npm install -g npm-check-updates opencode-ai
 
 # Install dependencies
 sudo apt-get install -y gh libatomic1

@@ -33,5 +33,10 @@ REPO_DIR="$HOME/agent"
 cd $HOME
 
 # Clone the repository
-git clone https://x-access-token:$TOKEN@github.com/matthieumota/agent.git
+if [ -d "$REPO_DIR" ]; then
+    cd "$REPO_DIR"
+    git pull https://x-access-token:$TOKEN@$REPO_URL
+else
+    git clone https://x-access-token:$TOKEN@$REPO_URL
+fi
 EOF
