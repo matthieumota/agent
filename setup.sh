@@ -5,27 +5,27 @@ sudo apt-get update
 sudo apt-get upgrade -y
 
 # Create agent user
-if ! id ralph &> /dev/null; then
-    sudo useradd -m -s /bin/bash ralph
-    echo "ralph ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/ralph
+if ! id fiorella &> /dev/null; then
+    sudo useradd -m -s /bin/bash fiorella
+    echo "fiorella ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/fiorella
 fi
 
-sudo mkdir -p /home/ralph/.ssh
+sudo mkdir -p /home/fiorella/.ssh
 
-sudo cp /home/ubuntu/.ssh/authorized_keys /home/ralph/.ssh/
-sudo cp /home/ubuntu/.ssh/id_ed25519 /home/ralph/.ssh/
-sudo cp /home/ubuntu/.ssh/app-private-key.pem /home/ralph/.ssh/
+sudo cp /home/ubuntu/.ssh/authorized_keys /home/fiorella/.ssh/
+sudo cp /home/ubuntu/.ssh/id_ed25519 /home/fiorella/.ssh/
+sudo cp /home/ubuntu/.ssh/app-private-key.pem /home/fiorella/.ssh/
 
-sudo chmod 700 /home/ralph/.ssh
-sudo chmod 600 /home/ralph/.ssh/authorized_keys
-sudo chmod 600 /home/ralph/.ssh/id_ed25519
-sudo chmod 600 /home/ralph/.ssh/app-private-key.pem
-sudo chown -R ralph:ralph /home/ralph/.ssh
+sudo chmod 700 /home/fiorella/.ssh
+sudo chmod 600 /home/fiorella/.ssh/authorized_keys
+sudo chmod 600 /home/fiorella/.ssh/id_ed25519
+sudo chmod 600 /home/fiorella/.ssh/app-private-key.pem
+sudo chown -R fiorella:fiorella /home/fiorella/.ssh
 
 TOKEN=$(bash ./get-token.sh)
 export TOKEN
 
-sudo -E -u ralph -H bash << 'EOF'
+sudo -E -u fiorella -H bash << 'EOF'
 REPO_URL="github.com/matthieumota/agent.git"
 REPO_DIR="$HOME/agent"
 
