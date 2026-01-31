@@ -130,6 +130,7 @@ If the agent can't connect to your browser:
 - SSH keys should be kept secure
 - GitHub App tokens expire after 10 minutes
 - The browser debugging port should not be exposed publicly
+- Commits are signed with SSH keys for verification
 
 ## Contributing
 
