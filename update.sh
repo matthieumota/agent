@@ -8,11 +8,12 @@ sudo apt-get upgrade -y
 TOKEN=$(bash ./get-token.sh)
 git pull https://x-access-token:${TOKEN}@github.com/matthieumota/agent.git
 
-# Install Nodejs
+# Install Nodejs and npm dependencies
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 \. "$HOME/.nvm/nvm.sh"
 nvm install node
-npm install -g npm-check-updates opencode-ai
+npm install -g npm-check-updates @github/copilot opencode-ai
+curl -fsSL https://claude.ai/install.sh | bash
 
 # Install dependencies
 sudo apt-get install -y fail2ban gh libatomic1 ufw
