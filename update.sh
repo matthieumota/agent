@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Update and upgrade the system
+sudo apt-get update
+sudo apt-get upgrade -y
+
 # Update the repository
 TOKEN=$(bash ./get-token.sh)
 git pull https://x-access-token:${TOKEN}@github.com/matthieumota/agent.git
