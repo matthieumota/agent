@@ -16,6 +16,7 @@ sudo apt-get install -y fail2ban \
     libatomic1 \
     php8.5-cli \
     php8.5-curl \
+    php8.5-mbstring \
     php8.5-zip \
     ufw \
     zip \
