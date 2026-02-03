@@ -21,10 +21,10 @@ cd agent
 
 ## Auth Github
 
-We can authenticate from Github App :
+We can authenticate from Github account :
 
 ```bash
-gh auth login --with-token < <(bash /home/fiorella/agent/get-token.sh)
+gh auth login
 ```
 
 ## Browser
