@@ -1,11 +1,31 @@
 #!/bin/bash
 
+# Configure PPAs
+sudo apt-add-repository ppa:ondrej/php -y
+
 # Update and upgrade the system
 sudo apt-get update
 sudo apt-get upgrade -y
 
 # Update the repository
 git fetch -p && git pull --rebase
+
+# Install dependencies
+sudo apt-get install -y fail2ban \
+    gh \
+    libatomic1 \
+    php8.5-cli \
+    php8.5-curl \
+    php8.5-zip \
+    ufw \
+    zip \
+    zsh
+
+# Oh My Zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+
+# Use Zsh as default shell
+sudo chsh -s $(which zsh) $USER
 
 # Install Nodejs and npm dependencies
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
@@ -14,8 +34,17 @@ nvm install node
 npm install -g npm-check-updates @github/copilot opencode-ai
 curl -fsSL https://claude.ai/install.sh | bash
 
-# Install dependencies
-sudo apt-get install -y fail2ban gh libatomic1 ufw
+# Composer
+if [ ! -f /usr/local/bin/composer ]; then
+    curl -sS https://getcomposer.org/installer | php
+    sudo mv composer.phar /usr/local/bin/composer
+fi
+
+# Add composer global bin to PATH
+grep -qF 'export PATH=$HOME/.config/composer/vendor/bin:$PATH' ~/.zshrc || echo 'export PATH=$HOME/.config/composer/vendor/bin:$PATH' >> ~/.zshrc
+
+# PHP Dependencies
+composer global require laravel/installer
 
 # Install Docker
 if ! command -v docker &> /dev/null; then
