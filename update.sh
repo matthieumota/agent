@@ -141,9 +141,9 @@ export PATH="$HOME/.npm-global/bin:$HOME/.local/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
-# OpenClaw Completion - AFTER PATH is set
+# OpenClaw Completion - AFTER PATH is set (optional, may fail)
 if command -v openclaw &> /dev/null; then
-    source <(openclaw completion --shell zsh)
+    source <(openclaw completion --shell zsh 2>/dev/null) 2>/dev/null || true
 fi
 
 # Aliases
