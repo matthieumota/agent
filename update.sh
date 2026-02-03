@@ -37,7 +37,7 @@ fi
 
 # Install system dependencies
 echo "📦 Installing system dependencies..."
-sudo apt-get install -y fail2ban gh libatomic1 ufw
+sudo apt-get install -y fail2ban gh libatomic1 ufw zsh
 
 # Install Docker
 if ! command -v docker &> /dev/null; then
@@ -98,6 +98,51 @@ fi
 # echo "🐳 Installing Dokploy..."
 # curl -sSL https://dokploy.com/install.sh | sh
 
+# Setup Zsh
+echo "🐚 Setting up Zsh..."
+if [ -n "$(command -v zsh)" ]; then
+    # Change default shell to zsh if not already
+    if [ "$SHELL" != "$(which zsh)" ]; then
+        chsh -s $(which zsh)
+        echo "✅ Default shell changed to zsh"
+    else
+        echo "✅ Zsh is already the default shell"
+    fi
+
+    # Install Oh My Zsh if not present
+    if [ ! -d "$HOME/.oh-my-zsh" ]; then
+        echo "📦 Installing Oh My Zsh..."
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+        echo "✅ Oh My Zsh installed"
+    else
+        echo "✅ Oh My Zsh already installed"
+    fi
+
+    # Configure .zshrc if not present
+    if [ ! -f "$HOME/.zshrc" ] || ! grep -q "FIORA_CONFIG" "$HOME/.zshrc"; then
+        echo "⚙️  Configuring .zshrc..."
+        cat >> "$HOME/.zshrc" << 'EOF'
+
+# Fiorella AI Configuration
+export PATH="$HOME/.local/bin:$PATH"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+# Aliases
+alias ll='ls -lah'
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+
+EOF
+        echo "✅ .zshrc configured"
+    fi
+else
+    echo "⚠️  Zsh not found, skipping shell configuration"
+fi
+
 echo ""
 echo "✨ Update complete!"
 echo "Git user: $(git config --global user.name) <$(git config --global user.email)>"
+echo "Shell: $SHELL"
