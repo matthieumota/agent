@@ -101,11 +101,19 @@ fi
 # Setup Zsh
 echo "🐚 Setting up Zsh..."
 if [ -n "$(command -v zsh)" ]; then
-    # Change default shell to zsh if not already (requires sudo)
+    # Change default shell to zsh if not already
     if [ "$SHELL" != "$(which zsh)" ]; then
-        echo "⚠️  Changing default shell requires password."
-        echo "   Run manually: chsh -s $(which zsh)"
-        echo "   Or run: sudo chsh -u fiorella -s $(which zsh)"
+        if [ -w /etc/passwd ]; then
+            # Running with sudo, can change shell directly
+            sudo chsh -s $(which zsh) $USER 2>/dev/null || \
+            sudo chsh -u $USER -s $(which zsh) 2>/dev/null || \
+            echo "⚠️  Could not change shell automatically"
+            echo "✅ Default shell changed to zsh"
+        else
+            echo "⚠️  Changing default shell requires sudo."
+            echo "   Run manually: chsh -s $(which zsh)"
+            echo "   Or ask admin: sudo chsh -s $(which zsh) $USER"
+        fi
     else
         echo "✅ Zsh is already the default shell"
     fi
