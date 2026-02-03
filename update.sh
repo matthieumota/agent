@@ -128,14 +128,23 @@ if [ -n "$(command -v zsh)" ]; then
     fi
 
     # Configure .zshrc if not present
-    if [ ! -f "$HOME/.zshrc" ] || ! grep -q "FIORA_CONFIG" "$HOME/.zshrc"; then
+    if [ ! -f "$HOME/.zshrc" ] || ! grep -q "FIORA_PATH" "$HOME/.zshrc"; then
+        # Backup existing .zshrc
+        [ -f "$HOME/.zshrc" ] && cp "$HOME/.zshrc" "$HOME/.zshrc.backup"
+
         echo "⚙️  Configuring .zshrc..."
-        cat >> "$HOME/.zshrc" << 'EOF'
+        cat > "$HOME/.zshrc" << 'EOF'
 
 # Fiorella AI Configuration
-export PATH="$HOME/.local/bin:$PATH"
+# PATH - Must be FIRST before commands that use it
+export PATH="$HOME/.npm-global/bin:$HOME/.local/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+# OpenClaw Completion - AFTER PATH is set
+if command -v openclaw &> /dev/null; then
+    source <(openclaw completion --shell zsh)
+fi
 
 # Aliases
 alias ll='ls -lah'
@@ -143,6 +152,7 @@ alias gs='git status'
 alias ga='git add'
 alias gc='git commit'
 alias gp='git push'
+alias update='cd ~/agent && ./update.sh'
 
 EOF
         echo "✅ .zshrc configured"
