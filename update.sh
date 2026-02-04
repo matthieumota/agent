@@ -51,12 +51,12 @@ grep -qF 'export PATH=$HOME/.local/bin:$PATH' ~/.zshrc || echo 'export PATH=$HOM
 # Install Docker
 if ! command -v docker &> /dev/null; then
     curl -sSL https://get.docker.com | sh
-    sudo usermod -aG docker fiorella
+    sudo usermod -aG docker $USER
 fi
 
 # Configure Git
 git config --global user.name "Fiorella"
-git config --global user.email "fiorell@boxydev.com"
+git config --global user.email "fiorella@boxydev.com"
 git config --global user.signingkey ~/.ssh/id_ed25519.pub
 git config --global commit.gpgsign true
 git config --global tag.gpgSign true
