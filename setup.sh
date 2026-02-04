@@ -1,5 +1,5 @@
 #!/bin/bash
-AGENT="fiorella"
+AGENT=fiorella
 
 # Update and upgrade the system
 sudo apt-get update
@@ -16,7 +16,9 @@ fi
 
 sudo mkdir -p /home/$AGENT/.ssh
 
-sudo cp /home/ubuntu/.ssh/authorized_keys /home/$AGENT/.ssh/
+if [ ! -f /home/$AGENT/.ssh/authorized_keys ]; then
+    sudo cp /home/ubuntu/.ssh/authorized_keys /home/$AGENT/.ssh/
+fi
 sudo cp /home/ubuntu/.ssh/id_ed25519 /home/$AGENT/.ssh/
 
 sudo chmod 700 /home/$AGENT/.ssh

@@ -1,4 +1,5 @@
 #!/bin/bash
+SERVER=agent
 
 # Configure PPAs
 sudo apt-add-repository ppa:ondrej/php -y
@@ -11,12 +12,16 @@ sudo apt-get upgrade -y
 git fetch -p && git pull --rebase
 
 # Install dependencies
-sudo apt-get install -y fail2ban \
+sudo apt-get install -y \
+    fail2ban \
     gh \
     libatomic1 \
+    ncdu \
     php8.5-cli \
     php8.5-curl \
     php8.5-mbstring \
+    php8.5-sqlite3 \
+    php8.5-xml \
     php8.5-zip \
     ufw \
     zip \
@@ -62,6 +67,11 @@ git config --global commit.gpgsign true
 git config --global tag.gpgSign true
 git config --global gpg.format ssh
 
+# Set hostname
+sudo hostname $SERVER
+echo "$SERVER" | sudo tee /etc/hostname
+sudo sed -i "s/127.0.0.1.*localhost/127.0.0.1 $SERVER localhost/" /etc/hosts
+
 # Setup UFW
 sudo ufw allow 22
 sudo ufw --force enable
@@ -76,3 +86,6 @@ sudo service ssh restart
 
 # Install Dokploy
 # curl -sSL https://dokploy.com/install.sh | sh
+
+# Install Brave
+# curl -fsS https://dl.brave.com/install.sh | sh
