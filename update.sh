@@ -41,11 +41,12 @@ if [ ! -f /usr/local/bin/composer ]; then
     sudo mv composer.phar /usr/local/bin/composer
 fi
 
-# Add composer global bin to PATH
-grep -qF 'export PATH=$HOME/.config/composer/vendor/bin:$PATH' ~/.zshrc || echo 'export PATH=$HOME/.config/composer/vendor/bin:$PATH' >> ~/.zshrc
-
 # PHP Dependencies
 composer global require laravel/installer
+
+# Add bin to PATH
+grep -qF 'export PATH=$HOME/.config/composer/vendor/bin:$PATH' ~/.zshrc || echo 'export PATH=$HOME/.config/composer/vendor/bin:$PATH' >> ~/.zshrc
+grep -qF 'export PATH=$HOME/.local/bin:$PATH' ~/.zshrc || echo 'export PATH=$HOME/.local/bin:$PATH' >> ~/.zshrc
 
 # Install Docker
 if ! command -v docker &> /dev/null; then
