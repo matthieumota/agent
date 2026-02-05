@@ -112,7 +112,17 @@ install() {
     sudo cp /tmp/motd.sh /etc/update-motd.d/15-fiorella
     sudo chmod +x /etc/update-motd.d/15-fiorella
     rm /tmp/motd.sh
-    echo "✓ MOTD installed"
+
+    # Remove default MOTD files
+    echo "🧹 Cleaning default MOTD files..."
+    sudo rm -f /etc/update-motd.d/10-help-text
+    sudo rm -f /etc/update-motd.d/50-motd-news
+    sudo rm -f /etc/update-motd.d/50-landscape-sysinfo
+    sudo rm -f /etc/update-motd.d/85-fwupd
+    sudo rm -f /etc/update-motd.d/90-updates-available
+    sudo rm -f /etc/update-motd.d/95-hwe-eol
+
+    echo "✓ MOTD installed and cleaned"
 
     # Install OpenClaw
     # curl -fsSL https://openclaw.ai/install.sh | bash
