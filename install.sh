@@ -104,7 +104,15 @@ install() {
     # Disable Ssh password
     sudo sed -i 's/.*PasswordAuthentication .*/PasswordAuthentication no/' /etc/ssh/sshd_config
     grep -qF 'PasswordAuthentication no' /etc/ssh/sshd_config || echo "PasswordAuthentication no" | sudo tee -a /etc/ssh/sshd_config
+    sudo sed -i 's/.*PrintLastLog .*/PrintLastLog no/' /etc/ssh/sshd_config
+    grep -qF 'PrintLastLog no' /etc/ssh/sshd_config || echo "PrintLastLog no" | sudo tee -a /etc/ssh/sshd_config
     sudo service ssh restart
+
+    # motd
+    sudo chmod -x /etc/update-motd.d/*
+    sudo curl -fsSL https://raw.githubusercontent.com/matthieumota/agent/refs/heads/main/motd.sh -o /etc/update-motd.d/00-$AGENT
+    sudo chmod +x /etc/update-motd.d/00-$AGENT
+    sudo run-parts /etc/update-motd.d
 
     # Install OpenClaw
     # curl -fsSL https://openclaw.ai/install.sh | bash
