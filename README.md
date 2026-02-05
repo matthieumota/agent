@@ -1,6 +1,8 @@
 # Agent
 
-Repository where lives AI agent.
+![Agent](./agent.png)
+
+This repository contains the complete configuration for Fiorella's development and automation environment, Matthieu's AI agent and assistant.
 
 ## Get started
 
