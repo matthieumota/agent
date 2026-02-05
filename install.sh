@@ -106,6 +106,14 @@ install() {
     grep -qF 'PasswordAuthentication no' /etc/ssh/sshd_config || echo "PasswordAuthentication no" | sudo tee -a /etc/ssh/sshd_config
     sudo service ssh restart
 
+    # Install Fiorella MOTD
+    echo "🎨 Installing Fiorella MOTD..."
+    curl -fsSL https://raw.githubusercontent.com/matthieumota/agent/refs/heads/main/motd.sh -o /tmp/motd.sh
+    sudo cp /tmp/motd.sh /etc/update-motd.d/15-fiorella
+    sudo chmod +x /etc/update-motd.d/15-fiorella
+    rm /tmp/motd.sh
+    echo "✓ MOTD installed"
+
     # Install OpenClaw
     # curl -fsSL https://openclaw.ai/install.sh | bash
 
