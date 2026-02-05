@@ -5,23 +5,20 @@ Repository where lives AI agent.
 ## Get started
 
 ```bash
-# Generate a ssh key and add to Github
+# Run to create agent
+curl -fsSL https://raw.githubusercontent.com/matthieumota/agent/refs/heads/main/install.sh | bash -s setup
+
+# Run after logged as agent
+curl -fsSL https://raw.githubusercontent.com/matthieumota/agent/refs/heads/main/install.sh | bash
+
+# Generate a ssh key and add to agent's Github account
 ssh-keygen -t ed25519 -C "fiorella@boxydev.com"
-cat /home/ubuntu/.ssh/id_ed25519.pub
-
-# Run as ubuntu
-git clone git@github.com:matthieumota/agent.git
-cd agent
-./setup.sh
-
-# Log as fiorella
-cd agent
-./update.sh
+cat /home/fiorella/.ssh/id_ed25519.pub
 ```
 
 ## Auth Github
 
-We can authenticate from Github account :
+We can authenticate on agent's Github account :
 
 ```bash
 gh auth login
