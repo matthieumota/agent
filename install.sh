@@ -113,21 +113,21 @@ install() {
     sudo chmod +x /etc/update-motd.d/15-fiorella
     rm /tmp/motd.sh
 
-    # Remove all Ubuntu default MOTD files (keep only reboot-related)
-    echo "🧹 Removing Ubuntu default MOTD files..."
-    sudo rm -f /etc/update-motd.d/00-header
-    sudo rm -f /etc/update-motd.d/10-help-text
-    sudo rm -f /etc/update-motd.d/50-motd-news
-    sudo rm -f /etc/update-motd.d/50-landscape-sysinfo
-    sudo rm -f /etc/update-motd.d/85-fwupd
-    sudo rm -f /etc/update-motd.d/90-updates-available
-    sudo rm -f /etc/update-motd.d/91-contract-ua-esm-status
-    sudo rm -f /etc/update-motd.d/91-release-upgrade
-    sudo rm -f /etc/update-motd.d/92-unattended-upgrades
-    sudo rm -f /etc/update-motd.d/95-hwe-eol
-    sudo rm -f /etc/update-motd.d/97-overlayroot
+    # Disable Ubuntu default MOTD files (keep but don't execute)
+    echo "🧹 Disabling Ubuntu default MOTD files..."
+    sudo chmod -x /etc/update-motd.d/00-header 2>/dev/null || true
+    sudo chmod -x /etc/update-motd.d/10-help-text 2>/dev/null || true
+    sudo chmod -x /etc/update-motd.d/50-motd-news 2>/dev/null || true
+    sudo chmod -x /etc/update-motd.d/50-landscape-sysinfo 2>/dev/null || true
+    sudo chmod -x /etc/update-motd.d/85-fwupd 2>/dev/null || true
+    sudo chmod -x /etc/update-motd.d/90-updates-available 2>/dev/null || true
+    sudo chmod -x /etc/update-motd.d/91-contract-ua-esm-status 2>/dev/null || true
+    sudo chmod -x /etc/update-motd.d/91-release-upgrade 2>/dev/null || true
+    sudo chmod -x /etc/update-motd.d/92-unattended-upgrades 2>/dev/null || true
+    sudo chmod -x /etc/update-motd.d/95-hwe-eol 2>/dev/null || true
+    sudo chmod -x /etc/update-motd.d/97-overlayroot 2>/dev/null || true
 
-    echo "✓ MOTD installed - Only Fiorella MOTD + reboot checks will show"
+    echo "✓ MOTD installed - Ubuntu MOTD files disabled (reversible with chmod +x)"
 
     # Install OpenClaw
     # curl -fsSL https://openclaw.ai/install.sh | bash
