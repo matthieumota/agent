@@ -113,16 +113,21 @@ install() {
     sudo chmod +x /etc/update-motd.d/15-fiorella
     rm /tmp/motd.sh
 
-    # Remove default MOTD files
-    echo "🧹 Cleaning default MOTD files..."
+    # Remove all Ubuntu default MOTD files (keep only reboot-related)
+    echo "🧹 Removing Ubuntu default MOTD files..."
+    sudo rm -f /etc/update-motd.d/00-header
     sudo rm -f /etc/update-motd.d/10-help-text
     sudo rm -f /etc/update-motd.d/50-motd-news
     sudo rm -f /etc/update-motd.d/50-landscape-sysinfo
     sudo rm -f /etc/update-motd.d/85-fwupd
     sudo rm -f /etc/update-motd.d/90-updates-available
+    sudo rm -f /etc/update-motd.d/91-contract-ua-esm-status
+    sudo rm -f /etc/update-motd.d/91-release-upgrade
+    sudo rm -f /etc/update-motd.d/92-unattended-upgrades
     sudo rm -f /etc/update-motd.d/95-hwe-eol
+    sudo rm -f /etc/update-motd.d/97-overlayroot
 
-    echo "✓ MOTD installed and cleaned"
+    echo "✓ MOTD installed - Only Fiorella MOTD + reboot checks will show"
 
     # Install OpenClaw
     # curl -fsSL https://openclaw.ai/install.sh | bash
