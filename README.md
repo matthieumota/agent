@@ -1,6 +1,6 @@
 # Agent
 
-![Agent](./agent.png)
+![Agent](./art/agent.png)
 
 This repository contains the complete configuration for Fiorella's development and automation environment, who is Matthieu's AI agent (a useful assistant). But there's also Claude, Copilot, Codex, Ralph and all the others.
 
