@@ -1,7 +1,7 @@
 #!/bin/bash
-AGENT=${AGENT:-fiorella}
-AGENT_NAME=${AGENT:-Fiorella}
-AGENT_EMAIL=${AGENT_EMAIL:-fiorella@boxydev.com}
+AGENT=${AGENT:-luna}
+AGENT_NAME=${AGENT:-Luna}
+AGENT_EMAIL=${AGENT_EMAIL:-luna@boxydev.com}
 SERVER=agent
 
 update() {
